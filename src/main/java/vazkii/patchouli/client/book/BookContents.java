@@ -242,6 +242,13 @@ public class BookContents extends AbstractReadStateHolder {
 	}
 
 	protected InputStream loadJson(ResourceLocation resloc, ResourceLocation fallback) {
+		
+		try {
+			return Minecraft.getInstance().getResourceManager().getResource(resloc).getInputStream();
+		} catch (IOException e) {
+			//no-op
+		}
+		
 		String path = "/data/" + resloc.getNamespace() + "/" + resloc.getPath();
 		Patchouli.LOGGER.debug("Loading {}", path);
 
